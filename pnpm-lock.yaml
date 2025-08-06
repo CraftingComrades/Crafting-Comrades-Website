@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   pocketbase:
-    specifier: ^0.10.0
-    version: 0.10.0
+    specifier: ^0.26.2
+    version: 0.26.2
 
 devDependencies:
   '@fontsource/fira-mono':
@@ -1512,8 +1512,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /pocketbase@0.10.0:
-    resolution: {integrity: sha512-OWcPRcOPNiTqek5wkf56mCmkox4w5/h1x+ySBNqzQ0Ux7ztEv3aq3Gr91bwn3VcXN7o48XVbKny7A922hNIbQw==}
+  /pocketbase@0.26.2:
+    resolution: {integrity: sha512-WA8EOBc3QnSJh8rJ3iYoi9DmmPOMFIgVfAmIGux7wwruUEIzXgvrO4u0W2htfQjGIcyezJkdZOy5Xmh7SxAftw==}
     dev: false
 
   /postcss@8.4.21:
