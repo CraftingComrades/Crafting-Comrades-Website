@@ -11,8 +11,8 @@ dependencies:
 
 devDependencies:
   '@fontsource/fira-mono':
-    specifier: ^4.5.10
-    version: 4.5.10
+    specifier: ^5.2.6
+    version: 5.2.6
   '@neoconfetti/svelte':
     specifier: ^2.2.2
     version: 2.2.2(svelte@3.55.1)
@@ -282,8 +282,8 @@ packages:
       - supports-color
     dev: true
 
-  /@fontsource/fira-mono@4.5.10:
-    resolution: {integrity: sha512-bxUnRP8xptGRo8YXeY073DSpfK74XpSb0ZyRNpHV9WvLnJ7TwPOjZll8hTMin7zLC6iOp59pDZ8EQDj1gzgAQQ==}
+  /@fontsource/fira-mono@5.2.6:
+    resolution: {integrity: sha512-6pyiGeFH+5DP5sICSwx5wu+9BlTEMTKki7bTppsEqXJysi1MiK82n6oSUaYkQWRLH51+DK7zv2JJsi82cOIS3g==}
     dev: true
 
   /@humanwhocodes/config-array@0.11.8:
