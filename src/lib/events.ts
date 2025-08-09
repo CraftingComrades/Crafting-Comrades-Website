@@ -9,9 +9,9 @@ const allEvents = {
 			map: 'Treasure Map',
 			about: 'Crew',
 			services: 'Bounty',
-			tmpFiles: "Ship's Log"
+			tmpFiles: "Ship's Log",
 		},
-		copyright: '© Arr! All rights reserved, ye scurvy dogs!'
+		copyright: '© Arr! All rights reserved, ye scurvy dogs!',
 	},
 	summer: {
 		key: 'summer',
@@ -23,9 +23,9 @@ const allEvents = {
 			map: 'Beach Map',
 			about: 'Lifeguards',
 			services: 'Surf Shop',
-			tmpFiles: 'Holiday Snaps'
+			tmpFiles: 'Holiday Snaps',
 		},
-		copyright: '© Sizzling Summer! All rights reserved under the sun!'
+		copyright: '© Sizzling Summer! All rights reserved under the sun!',
 	},
 	fool: {
 		key: 'fool',
@@ -37,10 +37,10 @@ const allEvents = {
 			map: 'Mapw',
 			about: 'Abawut',
 			services: 'Shewvicesh',
-			tmpFiles: 'TMPW Fiwesh'
+			tmpFiles: 'TMPW Fiwesh',
 		},
-		copyright: '© OwO Aww wiwhtsh weshewved undew UwU!'
-	}
+		copyright: '© OwO Aww wiwhtsh weshewved undew UwU!',
+	},
 };
 
 const defaultEvent = {
@@ -53,9 +53,9 @@ const defaultEvent = {
 		map: 'Map',
 		about: 'About',
 		services: 'Services',
-		tmpFiles: 'TMP Files'
+		tmpFiles: 'TMP Files',
 	},
-	copyright: '© copyright lololol'
+	copyright: '© copyright lololol',
 };
 
 export function getCurrentEvent() {

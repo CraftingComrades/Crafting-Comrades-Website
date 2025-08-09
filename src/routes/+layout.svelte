@@ -1,13 +1,10 @@
 <script lang="ts">
 	import OnlineServer from '$lib/OnlineServer.svelte';
 	import Header from './Header.svelte';
-
 	import { getCurrentEvent } from '$lib/events';
-	interface Props {
-		children?: import('svelte').Snippet;
-	}
+	import type { LayoutProps } from './$types';
 
-	let { children }: Props = $props();
+	let { children }: LayoutProps = $props();
 	const event = getCurrentEvent();
 </script>
 

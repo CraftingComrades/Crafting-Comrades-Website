@@ -1,32 +1,41 @@
-import type { BaseModel, Record as PBRecord } from 'pocketbase';
-
 /**
  * This file was @generated using pocketbase-typegen
  */
 
+import type PocketBase from 'pocketbase';
+import type { RecordService } from 'pocketbase';
+
 export enum Collections {
+	// Authorigins = '_authOrigins',
+	// Externalauths = '_externalAuths',
+	// Mfas = '_mfas',
+	// Otps = '_otps',
+	// Superusers = '_superusers',
 	Modpacks = 'modpacks',
-	Users = 'users',
-	Worlds = 'worlds',
 	Services = 'services',
-	TemporaryFiles = 'temporaryFiles'
+	TemporaryFiles = 'temporaryFiles',
+	Worlds = 'worlds',
 }
 
 // Alias types for improved usability
 export type IsoDateString = string;
 export type RecordIdString = string;
+export type HTMLString = string;
+
+type ExpandType<T> = unknown extends T
+	? T extends unknown
+		? { expand?: unknown }
+		: { expand: T }
+	: { expand: T };
 
 // System fields
-export type BaseSystemFields<T = never> = {
+export type BaseSystemFields<T = unknown> = {
 	id: RecordIdString;
-	created: IsoDateString;
-	updated: IsoDateString;
 	collectionId: string;
 	collectionName: Collections;
-	expand?: T;
-};
+} & ExpandType<T>;
 
-export type AuthSystemFields<T = never> = {
+export type AuthSystemFields<T = unknown> = {
 	email: string;
 	emailVisibility: boolean;
 	username: string;
@@ -34,13 +43,11 @@ export type AuthSystemFields<T = never> = {
 } & BaseSystemFields<T>;
 
 // Record types for each collection
-
-export type UsersRecord = {
-	name?: string;
-	avatar?: string;
-};
-
 export type ModpacksRecord = {
+	id: string;
+	created?: IsoDateString;
+	updated?: IsoDateString;
+
 	title: string;
 	slug: string;
 	thumbnail: string;
@@ -52,11 +59,38 @@ export type ModpacksRecord = {
 	images?: string[];
 	otherDownloads?: string[];
 	downloads?: string[];
-	downloadPrefix?: string;
 	relatedWorlds?: RecordIdString[];
 };
 
+export type ServicesRecord = {
+	id: string;
+	created?: IsoDateString;
+	updated?: IsoDateString;
+	title: string;
+	slug: string;
+	link?: string;
+	linkButton?: string;
+	newTab?: boolean;
+	thumbnail: string;
+	tags?: string;
+	author?: string;
+	longDescription?: string;
+	images?: string[];
+	otherDownloads?: string[];
+	downloads?: string[];
+};
+
+export type TemporaryFilesRecord = {
+	id: string;
+	created?: IsoDateString;
+	updated?: IsoDateString;
+	file: string;
+};
+
 export type WorldsRecord = {
+	id: string;
+	created?: IsoDateString;
+	updated?: IsoDateString;
 	title: string;
 	slug: string;
 	thumbnail: string;
@@ -70,39 +104,37 @@ export type WorldsRecord = {
 	relatedModpacks?: RecordIdString[];
 };
 
-export type ServicesRecord = {
-	title: string;
-	slug: string;
-	link?: string;
-	linkButton?: string;
-	newTab?: boolean;
-	thumbnail: string;
-	tags?: string;
-	author?: string;
-	longDescription?: string;
-	images?: string[];
-	otherDownloads?: string[];
-	downloads?: string[];
-	downloadPrefix?: string;
-};
-
-export type TemporaryFilesRecord = {
-	file: RecordIdString;
-};
-
 // Response types include system fields and match responses from the PocketBase API
-export type ModpacksResponse<Texpand = unknown> = ModpacksRecord & BaseSystemFields<Texpand>;
-export type UsersResponse = UsersRecord & BaseModel & AuthSystemFields;
-export type WorldsResponse<Texpand = unknown> = WorldsRecord &
-	BaseModel &
+export type ModpacksResponse<Texpand = unknown> = Required<ModpacksRecord> &
 	BaseSystemFields<Texpand>;
-export type ServicesResponse = ServicesRecord & BaseModel & BaseSystemFields;
-export type TemporaryFilesResponse = TemporaryFilesRecord & BaseModel & BaseSystemFields;
+export type WorldsResponse<Texpand = unknown> = Required<WorldsRecord> & BaseSystemFields<Texpand>;
+export type ServicesResponse<Texpand = unknown> = Required<ServicesRecord> &
+	BaseSystemFields<Texpand>;
+export type TemporaryFilesResponse<Texpand = unknown> = Required<TemporaryFilesRecord> &
+	BaseSystemFields<Texpand>;
+
+// Types containing all Records and Responses, useful for creating typing helper functions
 
 export type CollectionRecords = {
 	modpacks: ModpacksRecord;
-	users: UsersRecord;
-	worlds: WorldsRecord;
 	services: ServicesRecord;
 	temporaryFiles: TemporaryFilesRecord;
+	worlds: WorldsRecord;
+};
+
+export type CollectionResponses = {
+	modpacks: ModpacksResponse;
+	services: ServicesResponse;
+	temporaryFiles: TemporaryFilesResponse;
+	worlds: WorldsResponse;
+};
+
+// Type for usage with type asserted PocketBase instance
+// https://github.com/pocketbase/js-sdk#specify-typescript-definitions
+
+export type TypedPocketBase = PocketBase & {
+	collection(idOrName: 'modpacks'): RecordService<ModpacksResponse>;
+	collection(idOrName: 'services'): RecordService<ServicesResponse>;
+	collection(idOrName: 'temporaryFiles'): RecordService<TemporaryFilesResponse>;
+	collection(idOrName: 'worlds'): RecordService<WorldsResponse>;
 };

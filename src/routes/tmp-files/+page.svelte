@@ -1,55 +1,7 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
-	import FileDownload from '$lib/FileDownload.svelte';
-	import type { PageData } from './$types';
-	import { pb } from '$lib/utils';
-	import { Collections } from '$lib/types';
-
-	interface Props {
-		data: PageData;
-	}
-
-	let { data }: Props = $props();
-
-	let files: FileList = $state();
-	let button: HTMLButtonElement = $state();
-
-	run(() => {
-		if (button) button.disabled = !files?.length;
-	});
-
-	function click() {
-		const formData = new FormData();
-		formData.append('file', files[0]);
-		formData.append('downloads', '0');
-
-		pb.collection(Collections.TemporaryFiles).create(formData);
-		location.reload();
-	}
 </script>
 
-<p>⚠️ All files here will be removed after 7 days. ⚠️</p>
-
-<div class="upload">
-	<input class="input" bind:files type="file" />
-	<button class="upload" bind:this={button} onclick={click}>Upload</button>
-</div>
-
-<div class="downloads" style="grid-template-columns: repeat(5, 1fr);">
-	{#each data.files as file}
-		<div class="file">
-			<FileDownload file={pb.getFileUrl(file, file.file)} />
-			<button
-				class="delete"
-				onclick={() => {
-					pb.collection(Collections.TemporaryFiles).delete(file.id);
-					location.reload();
-				}}>Delete</button
-			>
-		</div>
-	{/each}
-</div>
+<p>⚠️ This never worked correctly ⚠️</p>
 
 <style>
 	p {
