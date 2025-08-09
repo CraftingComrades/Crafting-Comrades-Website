@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { text } from 'svelte/internal';
 
-	let about = '';
-	let textarea: HTMLTextAreaElement | null = null;
+	let about = $state('');
+	let textarea: HTMLTextAreaElement | null = $state(null);
 
 	onMount(() => {
 		about = localStorage.getItem('about') || '';
@@ -19,7 +18,7 @@
 <textarea
 	bind:this={textarea}
 	bind:value={about}
-	on:input={(event) => {
+	oninput={(event) => {
 		localStorage.setItem('about', about);
 		event.currentTarget.style.height = 'auto';
 		event.currentTarget.style.height = event.currentTarget.scrollHeight + 'px';
@@ -28,7 +27,7 @@
 	id="about"
 	placeholder="Add your own about section :D"
 	aria-roledescription="He He, this data will be collected in the future >:) and eventually turn into a better about page!!! And everyone will be none the wiser!"
-/>
+></textarea>
 
 <style>
 	textarea {

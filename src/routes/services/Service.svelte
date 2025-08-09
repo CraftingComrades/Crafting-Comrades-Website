@@ -4,26 +4,34 @@
 	import type { ServicesRecord, ServicesResponse } from '$lib/types';
 	import { pb } from '$lib/utils';
 
-	export let service: ServicesRecord;
-	export const link: Boolean = false;
-	let hidden = true;
+	interface Props {
+		service: ServicesRecord;
+	}
+
+	let { service }: Props = $props();
+
+	let hidden = $state(true);
 	let toggleHidden = () => {
 		hidden = !hidden;
 	};
 </script>
 
-<div class="listitem" id="{service.slug}">
-	<button class="header" on:click={toggleHidden}>
-		<img src={pb.getFileUrl(service, service.thumbnail)} class="thumbnail" alt={`${service.title} Icon`} />
+<div class="listitem" id={service.slug}>
+	<button class="header" onclick={toggleHidden}>
+		<img
+			src={pb.files.getURL(service, service.thumbnail, { thumb: '128x128' })}
+			class="thumbnail"
+			alt={`${service.title} Icon`}
+		/>
 		<div class="information">
-            <div>
-                <div class="title">{service.title}</div>
-            </div>
+			<div>
+				<div class="title">{service.title}</div>
+			</div>
 			<div class="tags">
 				{#if service.tags?.length}
-				{#each (service.tags ?? "").split(",") as tag}
-					<div class="tag">{tag}</div>
-				{/each}
+					{#each (service.tags ?? '').split(',') as tag}
+						<div class="tag">{tag}</div>
+					{/each}
 				{/if}
 			</div>
 		</div>
@@ -41,26 +49,28 @@
 					<div class="section-title">Images</div>
 					<div class="images">
 						{#each service.images ?? [] as image}
-							<PreviewImage imageUrl={pb.getFileUrl(service, image)} />
+							<PreviewImage imageRef={{ record: service, file: image }} />
 						{/each}
 					</div>
 				</div>
 			{/if}
 			{#if service.link}
-				<div class="link"><a target={service.newTab ? "_blank" : "_self"} class="linkButton" href={service.link}>
-					{#if service.linkButton}
-						{service.linkButton}
-					{:else}
-						Go!
-					{/if}
-				</a></div>
+				<div class="link">
+					<a target={service.newTab ? '_blank' : '_self'} class="linkButton" href={service.link}>
+						{#if service.linkButton}
+							{service.linkButton}
+						{:else}
+							Go!
+						{/if}
+					</a>
+				</div>
 			{/if}
 			{#if service.otherDownloads?.length}
 				<div class="section">
 					<div class="section-title">Other Downloads</div>
 					<div class="other-downloads">
 						{#each service.otherDownloads ?? [] as download}
-                            <FileDownload file={pb.getFileUrl(service, download)} />
+							<FileDownload file={pb.files.getURL(service, download)} />
 						{/each}
 					</div>
 				</div>
@@ -70,7 +80,7 @@
 					<div class="section-title">Downloads</div>
 					<div class="downloadslink">
 						{#each service.downloads ?? [] as download}
-                            <FileDownload file={pb.getFileUrl(service, download)} />
+							<FileDownload file={pb.files.getURL(service, download)} />
 						{/each}
 					</div>
 				</div>
