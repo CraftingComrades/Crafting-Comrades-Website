@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import type { ServerPingResponse } from './ServerPingResponse';
 
-	let serverData: ServerPingResponse;
+	let serverData: ServerPingResponse = $state();
 
 	async function fetchServerData() {
 		fetch('https://api.mcsrvstat.us/2/craftingcomrades.net')

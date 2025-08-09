@@ -1,17 +1,23 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import FileDownload from '$lib/FileDownload.svelte';
 	import type { PageData } from './$types';
 	import { pb } from '$lib/utils';
 	import { Collections } from '$lib/types';
 
-	export let data: PageData;
-
-	let files: FileList;
-	let button: HTMLButtonElement;
-
-	$: {
-		if (button) button.disabled = !files?.length;
+	interface Props {
+		data: PageData;
 	}
+
+	let { data }: Props = $props();
+
+	let files: FileList = $state();
+	let button: HTMLButtonElement = $state();
+
+	run(() => {
+		if (button) button.disabled = !files?.length;
+	});
 
 	function click() {
 		const formData = new FormData();
@@ -27,7 +33,7 @@
 
 <div class="upload">
 	<input class="input" bind:files type="file" />
-	<button class="upload" bind:this={button} on:click={click}>Upload</button>
+	<button class="upload" bind:this={button} onclick={click}>Upload</button>
 </div>
 
 <div class="downloads" style="grid-template-columns: repeat(5, 1fr);">
@@ -36,7 +42,7 @@
 			<FileDownload file={pb.getFileUrl(file, file.file)} />
 			<button
 				class="delete"
-				on:click={() => {
+				onclick={() => {
 					pb.collection(Collections.TemporaryFiles).delete(file.id);
 					location.reload();
 				}}>Delete</button

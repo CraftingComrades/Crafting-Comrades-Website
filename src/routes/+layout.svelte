@@ -3,6 +3,11 @@
 	import Header from './Header.svelte';
 
 	import { getCurrentEvent } from '$lib/events';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 	const event = getCurrentEvent();
 </script>
 
@@ -10,13 +15,13 @@
 	<link rel="stylesheet" href="/{event.key}/styles.css" />
 </svelte:head>
 
-<div class="background" />
+<div class="background"></div>
 <div class="app">
 	<Header />
 
 	<main>
 		<OnlineServer />
-		<slot />
+		{@render children?.()}
 	</main>
 
 	<footer>
