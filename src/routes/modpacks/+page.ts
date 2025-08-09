@@ -1,14 +1,16 @@
 import { Collections, type ModpacksResponse } from '$lib/types';
 import { pb } from '$lib/utils';
+import type { PageLoad } from './$types';
 
-// export const prerender = true;
+export const prerender = true;
 
-/** @type {import('./$types').PageLoad} */
-export async function load({}) {
-	const records: ModpacksResponse[] = await pb.collection(Collections.Modpacks).getFullList(200 /* batch size */, {
-		sort: '-created'
-	});
+export const load: PageLoad = async ({}) => {
+	const records: ModpacksResponse[] = await pb
+		.collection(Collections.Modpacks)
+		.getFullList(100 /* batch size */, {
+			sort: '-created',
+		});
 	return {
-		modpacks: records
+		modpacks: records,
 	};
-}
+};
