@@ -1,12 +1,8 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageProps } from './$types';
 	import World from './World.svelte';
 
-	interface Props {
-		data: PageData;
-	}
-
-	let { data }: Props = $props();
+	let { data }: PageProps = $props();
 </script>
 
 <svelte:head>
@@ -27,6 +23,6 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
-        width: 100%;
+		width: 100%;
 	}
 </style>

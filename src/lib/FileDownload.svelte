@@ -1,12 +1,8 @@
-<!-- New svelte component that takes in a file url and displays a svg file icon with the file extention as text over top -->
 <script lang="ts">
 	import { getCurrentEvent } from './events';
 
-	
-
 	interface Props {
-		// import { capitalCase } from "change-case";
-		file: string; // https://db.craftingcomrades.net/api/files/ip9y62tsxf92g77/9lt2tjloj6b5cy7/curseforge_PYOLtVqQYV.zip
+		file: string; // url to the file
 		name?: string;
 	}
 

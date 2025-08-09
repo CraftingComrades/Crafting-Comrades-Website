@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { text } from 'svelte/internal';
 
 	let about = $state('');
 	let textarea: HTMLTextAreaElement | null = $state(null);
