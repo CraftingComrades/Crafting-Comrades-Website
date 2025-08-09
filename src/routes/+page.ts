@@ -5,5 +5,5 @@ export const prerender = true;
 
 /** @type {import('./$types').LayoutServerLoad} */
 export function load({}) {
-	throw redirect(307, '/modpacks');
+	redirect(307, '/modpacks');
 }

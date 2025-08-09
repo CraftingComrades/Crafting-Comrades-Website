@@ -1,16 +1,23 @@
 <script lang="ts">
-    export let imageUrl: string;
+    import { createBubbler } from 'svelte/legacy';
 
-    let overlayHidden = true;
+    const bubble = createBubbler();
+    interface Props {
+        imageUrl: string;
+    }
+
+    let { imageUrl }: Props = $props();
+
+    let overlayHidden = $state(true);
 </script>
 
 <div class="image-container">
     <!-- Image thumbnail -->
-    <img class="image" alt={`${imageUrl} Image`} src={imageUrl} on:click={() => overlayHidden = false} on:keyup/>
+    <img class="image" alt={`${imageUrl} Image`} src={imageUrl} onclick={() => overlayHidden = false} onkeyup={bubble('keyup')}/>
     
     <!-- Clickable popup that shows larger image -->
     {#if !overlayHidden}
-        <img class="image-overlay" alt={`${imageUrl} Image`} src={imageUrl} on:click={() => overlayHidden = true} on:keyup />
+        <img class="image-overlay" alt={`${imageUrl} Image`} src={imageUrl} onclick={() => overlayHidden = true} onkeyup={bubble('keyup')} />
     {/if}
 </div>
 

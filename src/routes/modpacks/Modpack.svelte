@@ -4,16 +4,20 @@
 	import type { ModpacksRecord, ModpacksResponse } from '$lib/types';
 	import { pb } from '$lib/utils';
 
-	export let modpack: ModpacksRecord;
+	interface Props {
+		modpack: ModpacksRecord;
+	}
+
+	let { modpack }: Props = $props();
 	export const link: Boolean = false;
-	let hidden = true;
+	let hidden = $state(true);
 	let toggleHidden = () => {
 		hidden = !hidden;
 	};
 </script>
 
 <div class="listitem" id="{modpack.slug}">
-	<button class="header" on:click={toggleHidden}>
+	<button class="header" onclick={toggleHidden}>
 		<img src={pb.getFileUrl(modpack, modpack.thumbnail)} class="thumbnail" alt={`${modpack.title} Icon`} />
 		<div class="information">
             <div>

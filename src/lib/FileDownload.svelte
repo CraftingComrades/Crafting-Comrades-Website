@@ -2,10 +2,15 @@
 <script lang="ts">
 	import { getCurrentEvent } from './events';
 
-	// import { capitalCase } from "change-case";
+	
 
-	export let file: string; // https://db.craftingcomrades.net/api/files/ip9y62tsxf92g77/9lt2tjloj6b5cy7/curseforge_PYOLtVqQYV.zip
-	export let name: string = '';
+	interface Props {
+		// import { capitalCase } from "change-case";
+		file: string; // https://db.craftingcomrades.net/api/files/ip9y62tsxf92g77/9lt2tjloj6b5cy7/curseforge_PYOLtVqQYV.zip
+		name?: string;
+	}
+
+	let { file, name = '' }: Props = $props();
 	let fileName: string =
 		name || file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.') - 11);
 	let extension: string = file.substring(file.lastIndexOf('.') + 1);

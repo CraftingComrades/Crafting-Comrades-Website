@@ -4,16 +4,20 @@
 	import type { WorldsResponse } from '$lib/types';
 	import { pb } from '$lib/utils';
 
-	export let world: WorldsResponse;
+	interface Props {
+		world: WorldsResponse;
+	}
+
+	let { world }: Props = $props();
 	export const link: Boolean = false;
-	let hidden = true;
+	let hidden = $state(true);
 	let toggleHidden = () => {
 		hidden = !hidden;
 	};
 </script>
 
 <div class="listitem" id="{world.slug}">
-	<button class="header" on:click={toggleHidden}>
+	<button class="header" onclick={toggleHidden}>
 		<img src={pb.getFileUrl(world, world.thumbnail)} class="thumbnail" alt={`${world.title} Icon`} />
 		<div class="information">
 			<div>
