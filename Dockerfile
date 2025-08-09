@@ -1,6 +1,6 @@
-FROM --platform=linux/amd64 node:18-alpine
+FROM node:18-alpine
 
-ENV NODE_ENV development
+ENV NODE_ENV=development
 
 RUN npm install -g pnpm
 
@@ -12,11 +12,11 @@ RUN pnpm i
 
 COPY . .
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 RUN pnpm run build
 
-FROM --platform=linux/amd64 node:18-slim
+FROM node:18-slim
 
 WORKDIR /app
 
