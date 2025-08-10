@@ -25,8 +25,8 @@
 body {
 	min-height: 100vh;
 	margin: 0;
-	background-attachment: fixed;
 	background-color: var(--color-bg-1);
+  background-attachment: fixed;
 	background-size: 100vw 100vh;
 	background-image: radial-gradient(
 			50% 50% at 50% 50%,
@@ -34,6 +34,13 @@ body {
 			rgba(255, 255, 255, 0) 100%
 		),
 		linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);
+}
+
+/* Check if supports background-attachment: fixed */
+@supports (background-attachment: fixed) {
+	body {
+    background-size: cover;
+	}
 }
 
 h1,
@@ -126,6 +133,7 @@ footer {
 	outline: 0.1rem solid white;
 	transition: outline 0.2s;
 }
+
 .listitem:has(.hidden):hover {
 	outline: 0.1rem solid white;
 }
@@ -244,11 +252,13 @@ footer {
 }
 .linkButton {
 	font-size: 1rem;
-	padding: 0.5rem;
+	padding: 0.5rem 1rem;
 	border-radius: 0.5rem;
 	background-color: #fff;
 	box-shadow: -0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.075);
 	outline: 0.1rem solid white;
+  width: 100%;
+  text-align: center;
 }
 .linkButton:hover {
 	outline: 0.1rem solid var(--color-theme-1);
