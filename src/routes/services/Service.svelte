@@ -56,7 +56,12 @@
 			{/if}
 			{#if service.link}
 				<div class="link">
-					<a target={service.newTab ? '_blank' : '_self'} class="linkButton" href={service.link}>
+					<a
+						target={service.newTab ? '_blank' : '_self'}
+						class="linkButton"
+						style=""
+						href={service.link}
+					>
 						{#if service.linkButton}
 							{service.linkButton}
 						{:else}
