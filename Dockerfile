@@ -16,7 +16,7 @@ ENV NODE_ENV=production
 
 RUN pnpm run build
 
-FROM node:18-slim
+FROM node:slim
 
 WORKDIR /app
 
