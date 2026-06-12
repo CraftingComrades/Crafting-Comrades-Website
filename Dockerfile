@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY package*.json pnpm-lock.yaml* ./
 
-RUN pnpm i
+RUN pnpm i --dangerously-allow-all-builds
 
 COPY . .
 
