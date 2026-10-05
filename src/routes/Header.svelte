@@ -1,7 +1,11 @@
 <script lang="ts">
-	import { getCurrentEvent } from '$lib/events';
+	import type { SiteEvent } from '$lib/events';
 
-	const event = getCurrentEvent();
+	interface Props {
+		event: SiteEvent;
+	}
+
+	let { event }: Props = $props();
 </script>
 
 <header>
@@ -9,6 +13,17 @@
 	<div class="banner">
 		<img src="/{event.key}/banner.png" alt="Banner" class="banner" />
 	</div>
+	{#if event.key == 'retro'}
+		<div class="banner-progress">
+			<span class="banner-progress-label">
+				Downloading banner&hellip;
+				<span class="banner-progress-done">Ready.</span>
+			</span>
+			<div class="banner-progress-well">
+				<div class="banner-progress-fill"></div>
+			</div>
+		</div>
+	{/if}
 	<nav>
 		<a href="/modpacks">{event.tabs.modpacks}</a>
 		<a href="/worlds">{event.tabs.worlds}</a>
@@ -25,10 +40,6 @@
 		flex-direction: column;
 		align-items: center;
 	}
-	.banner {
-		width: 100%;
-		max-width: 1000px;
-	}
 	nav {
 		display: flex;
 		flex-direction: row;
@@ -42,15 +53,15 @@
 		text-decoration: none;
 		max-width: 10rem;
 		width: 100%;
-		background-color: #fff;
-		border: 1px solid rgb(255, 255, 255);
+		background-color: var(--color-nav-bg);
+		border: 1px solid var(--color-nav-border);
 		border-radius: 0.25rem;
 		padding: 0.5rem 1rem;
 		margin: 0.5rem;
-		box-shadow: -0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.075);
+		box-shadow: var(--color-nav-shadow);
 		transition: all 0.2s ease-in-out;
 	}
 	nav a:hover {
-		border: 1px solid rgb(255, 0, 0);
+		border: 1px solid var(--color-nav-hover-border);
 	}
 </style>

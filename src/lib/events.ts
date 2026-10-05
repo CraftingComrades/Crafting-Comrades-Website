@@ -1,4 +1,22 @@
+import { dev } from '$app/environment';
+import { page } from '$app/state';
+
 const allEvents = {
+	retro: {
+		key: 'retro',
+		dateStart: { month: 6, day: 27 },
+		dateEnd: { month: 7, day: 6 },
+		tabs: {
+			modpacks: 'Downloads',
+			worlds: 'My Worlds',
+			map: 'Home Page',
+			about: 'Read Me',
+			services: 'Favourites',
+			tmpFiles: 'Temp Files',
+		},
+		copyright: '(c) 1998 Crafting Comrades. Best viewed in Netscape Navigator 4.0.',
+		fileIconExt: 'png',
+	},
 	pirate: {
 		key: 'pirate',
 		dateStart: { day: 14, month: 9 },
@@ -41,7 +59,7 @@ const allEvents = {
 		},
 		copyright: '© OwO Aww wiwhtsh weshewved undew UwU!',
 	},
-};
+} as const;
 
 const defaultEvent = {
 	key: 'default',
@@ -56,14 +74,22 @@ const defaultEvent = {
 		tmpFiles: 'TMP Files',
 	},
 	copyright: '© copyright lololol',
-};
+} as const;
+
+export type SiteEvent = (typeof allEvents)[keyof typeof allEvents] | typeof defaultEvent;
 
 export function getCurrentEvent() {
+	const override = dev ? page.url.searchParams.get('theme') : null;
+	if (override) {
+		const forced = Object.values(allEvents).find((event) => event.key === override);
+		if (forced) return forced;
+	}
+
 	const now = new Date();
 	const currentMonth = now.getMonth();
 	const currentDay = now.getDate();
 
-	for (const [_, event] of Object.entries(allEvents)) {
+	for (const event of Object.values(allEvents)) {
 		if (event.dateStart && event.dateEnd) {
 			const isAfterStart =
 				currentMonth > event.dateStart.month ||

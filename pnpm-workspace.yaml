@@ -1,0 +1,7 @@
+# pnpm 11 reads its settings from here rather than from the `pnpm` field in
+# package.json. esbuild needs its postinstall to run (it links the platform
+# binary), and pnpm treats an unapproved build script as a fatal error, which
+# otherwise breaks every `pnpm <script>` invocation. The Dockerfile passes
+# --dangerously-allow-all-builds, which covers the container build.
+allowBuilds:
+  esbuild: true

@@ -1,0 +1,644 @@
+@import url('/default/styles.css');
+
+@font-face {
+	font-family: 'W98UI';
+	src: url('/retro/fonts/MSW98UI-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'W98UI';
+	src: url('/retro/fonts/MSW98UI-Bold.woff2') format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'W98UI';
+	src: url('/retro/fonts/MSW98UI-Black.woff2') format('woff2');
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'W98UI-Mono';
+	src: url('/retro/fonts/MSW98UI-Mono-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	/* Win98 palette */
+	--face: #c0c0c0;
+	--face-light: #dfdfdf;
+	--face-dark: #9a9a9a;
+	--white: #ffffff;
+	--shadow: #808080;
+	--shadow-dk: #0a0a0a;
+	--desktop: #058787;
+	--desktop-dk: #035858;
+	--desktop-lt: #58a8a8;
+	--tip-bg: #ffc;
+	--titlebar-a: #000080;
+	--titlebar-b: #1084d0;
+	--titlebar-inactive-a: #808080;
+	--titlebar-inactive-b: #b5b5b5;
+	--ink: #222222;
+	--link: #0000ff;
+	--yellow: #ffd400;
+	--blue: #1084d0;
+	--red: #ff3b3b;
+	--green: #00b34d;
+	--purple: #8b3ff0;
+	--f-ui: 'W98UI', Tahoma, sans-serif;
+	--f-mono: 'W98UI-Mono', monospace;
+	--font-size: 11px;
+
+	/* 1px == 1px, matching --spacing-px in the source design system */
+	--px: 1px;
+
+	/* Bevels */
+	--bevel-out:
+		inset -1px -1px var(--shadow-dk), inset 1px 1px var(--white),
+		inset -2px -2px var(--shadow), inset 2px 2px var(--face-light);
+	--bevel-in:
+		inset -1px -1px var(--white), inset 1px 1px var(--shadow),
+		inset -2px -2px var(--face-light), inset 2px 2px var(--shadow-dk);
+	--bevel-in-button:
+		inset -1px -1px var(--white), inset 1px 1px var(--shadow-dk),
+		inset -2px -2px var(--face-light), inset 2px 2px var(--shadow);
+	--bevel-out-bold:
+		inset -2px -2px var(--shadow-dk), inset 1px 1px var(--shadow-dk),
+		inset 2px 2px var(--white), inset -3px -3px var(--shadow),
+		inset 3px 3px var(--face-light);
+	--bevel-in-bold:
+		inset 2px 2px var(--shadow-dk), inset -1px -1px var(--shadow-dk),
+		inset -2px -2px var(--white), inset 3px 3px var(--shadow),
+		inset -3px -3px var(--face-light);
+	--bevel-window:
+		inset -1px -1px var(--shadow-dk), inset 1px 1px var(--face-light),
+		inset -2px -2px var(--shadow), inset 2px 2px var(--white);
+	--bevel-flat:
+		inset -1px -1px 0 var(--face-light), inset 1px 1px 0 var(--shadow);
+	--bevel-flat-thick:
+		inset -2px -2px 0 var(--face-light), inset 2px 2px 0 var(--shadow);
+	--bevel-flat-out:
+		inset -1px -1px 0 var(--shadow), inset 1px 1px 0 var(--face-light);
+
+	--cur-default: url('/retro/cursors/default.cur'), default;
+	--cur-pointer: url('/retro/cursors/pointer.cur'), pointer;
+	--cur-text: url('/retro/cursors/text.cur'), text;
+	--cur-grab: url('/retro/cursors/grab.cur'), grab;
+	--cur-help: url('/retro/cursors/help.cur'), help;
+
+	--font-body: var(--f-ui);
+	--font-mono: var(--f-mono);
+	--color-bg-0: var(--desktop);
+	--color-bg-1: var(--desktop-dk);
+	--color-bg-2: var(--desktop-lt);
+	--color-theme-1: var(--link);
+	--color-theme-2: var(--titlebar-a);
+	--color-text: var(--ink);
+	--color-nav-bg: var(--face);
+	--color-nav-border: var(--face);
+	--color-nav-shadow: none;
+	--color-nav-hover-border: var(--titlebar-a);
+	--border-color: var(--face-dark);
+	--background-color: var(--face);
+	--text-color: var(--ink);
+
+	--banner-load-seconds: 60s;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* -------------------------------------------------------------- cursors ---- */
+
+body,
+a,
+button,
+input,
+select,
+textarea,
+label,
+summary,
+img {
+	cursor: var(--cur-default);
+}
+a:any-link,
+button,
+summary,
+label[for],
+[role='button'],
+.linkButton,
+.tag:is(a) {
+	cursor: var(--cur-pointer);
+}
+a:any-link:active,
+button:active {
+	cursor: var(--cur-grab);
+}
+input,
+textarea,
+[contenteditable='true'] {
+	cursor: var(--cur-text);
+}
+abbr[title] {
+	cursor: var(--cur-help);
+}
+
+/* ---------------------------------------------------------- page shell ---- */
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	font-size: 13px;
+	background-image: none;
+	background-color: var(--desktop-dk);
+	background-attachment: fixed;
+	color: var(--ink);
+	font-family: var(--f-ui);
+	font-size: var(--font-size);
+	-webkit-font-smoothing: none;
+}
+
+.background {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	opacity: 1;
+	background-image: url('/retro/bg_stars.gif');
+	background-repeat: repeat;
+	background-size: 111px 111px;
+	image-rendering: pixelated;
+}
+
+.app {
+	padding-bottom: 3rem;
+}
+
+main {
+	max-width: 46rem;
+	background: var(--face);
+	box-shadow: var(--bevel-out-bold);
+	color: var(--ink);
+	margin-top: 0.5rem;
+	padding: 1rem;
+}
+
+img,
+canvas,
+svg {
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+/* --------------------------------------------------------------- text ----- */
+
+h1,
+h2,
+h3 {
+	font-family: var(--f-ui);
+	font-weight: 700;
+	text-shadow: 1px 1px 0 var(--white);
+}
+
+h1 {
+	color: var(--titlebar-a);
+	font-size: 2rem;
+	text-align: center;
+}
+
+a {
+	color: var(--link);
+}
+
+a:any-link:hover {
+	color: var(--red);
+}
+
+pre {
+	font-family: var(--f-mono);
+	font-size: 0.875rem;
+	background: var(--white);
+	color: var(--ink);
+	border: 2px solid;
+	border-color: var(--face-dark) var(--white) var(--white) var(--face-dark);
+	box-shadow: var(--bevel-out-bold);
+	padding: 0.5rem;
+}
+
+/* ------------------------------------------------------- site controls ---- */
+
+header nav {
+	gap: 2px;
+	padding: 0.25rem;
+}
+
+header nav a {
+	background-color: var(--face);
+	border: none;
+	border-radius: 0;
+	box-shadow: var(--bevel-out);
+	color: var(--ink);
+	max-width: 12rem;
+	padding: 0.375rem 0.75rem;
+	margin: 0;
+}
+
+header nav a:hover {
+	color: var(--ink);
+}
+
+header nav a:active {
+	box-shadow: var(--bevel-in);
+	padding: 0.4375rem 0.6875rem 0.3125rem 0.8125rem;
+}
+
+button,
+input,
+select,
+textarea {
+	font-family: var(--f-ui);
+	font-size: inherit;
+}
+
+.button,
+button.header {
+	background: var(--face);
+	color: var(--ink);
+	border: none;
+	border-radius: 0;
+	box-shadow: var(--bevel-out);
+	padding: 0.25rem 0.5rem;
+}
+
+button.header:active {
+	box-shadow: var(--bevel-in);
+}
+
+textarea,
+input[type='text'] {
+	background: var(--white);
+	color: var(--ink);
+	border: 2px solid;
+	border-color: var(--face-dark) var(--white) var(--white) var(--face-dark);
+	box-shadow: var(--bevel-in);
+	padding: 0.25rem;
+	font-family: var(--f-mono);
+}
+
+/* --------------------------------------------------------- list items ----- */
+
+.listitem {
+	background: var(--white);
+	border: none;
+	border-radius: 0;
+	box-shadow: var(--bevel-out-bold);
+	color: var(--ink);
+	margin: 0.75rem 0;
+	padding: 0.5rem;
+	outline: none;
+	transition: none;
+}
+
+.listitem:hover,
+.listitem:has(.hidden):hover {
+	box-shadow: var(--bevel-in-bold);
+	outline: none;
+}
+
+.listitem .header {
+	background: none;
+	border-radius: 0;
+	height: 7rem;
+	padding: 0.5rem;
+}
+
+.listitem:has(.hidden) .header,
+.listitem:has(.hidden) .header:hover {
+	box-shadow: none;
+	outline: none;
+}
+
+.listitem .thumbnail {
+	border-radius: 0;
+	box-shadow: var(--bevel-in);
+}
+
+.title {
+	font-size: 1.125rem;
+	font-weight: 700;
+}
+
+/* Minecraftia looked out of place once the rest of the chrome was Win98. */
+.online-server-description {
+	color: var(--ink);
+	font-family: var(--f-mono);
+	font-size: 0.875rem;
+}
+
+.tags {
+	gap: 0.25rem;
+}
+
+.tag {
+	background: var(--face);
+	border-radius: 0;
+	box-shadow: var(--bevel-out);
+	color: var(--ink);
+	font-size: 0.875rem;
+	padding: 0.25rem 0.5rem;
+}
+
+.section,
+.hidden {
+	border-radius: 0;
+}
+
+.section {
+	background: var(--face);
+	border: none;
+	box-shadow: var(--bevel-window);
+	margin-top: 0.75rem;
+	padding: 0.75rem;
+	outline: none;
+	transition: none;
+}
+
+.section:hover {
+	box-shadow: var(--bevel-in);
+	outline: none;
+}
+
+.section-title {
+	font-size: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+/* A fieldset-style inset well for the long description blocks. */
+.long-description {
+	background: var(--white);
+	box-shadow: var(--bevel-in);
+	padding: 0.5rem;
+	font-size: 0.9375rem;
+}
+
+.linkButton {
+	background: var(--face);
+	border-radius: 0;
+	box-shadow: var(--bevel-out);
+	color: var(--ink);
+	outline: none;
+	padding: 0.5rem;
+}
+
+.linkButton:hover {
+	box-shadow: var(--bevel-in);
+	outline: none;
+}
+
+.file {
+	border-radius: 0;
+}
+
+.file-icon {
+	image-rendering: pixelated;
+}
+
+/* 3-column grids get tight under a Win98 chrome; drop to 2 earlier. */
+@media (max-width: 720px) {
+	.images,
+	.other-downloads,
+	.downloads {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* ------------------------------------------------------------- footer ----- */
+
+footer {
+	background: var(--face);
+	box-shadow: var(--bevel-out-bold);
+	color: var(--ink);
+	margin: 1rem auto 0;
+	max-width: 46rem;
+	padding: 0.75rem;
+	width: 100%;
+}
+
+footer p {
+	margin: 0;
+	text-align: center;
+	font-size: 0.8125rem;
+}
+
+/* --------------------------------------------------------- hero banner ---- */
+
+.banner {
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+	max-width: 1068px;
+  outline: 1px solid gray; 
+}
+.banner > img {
+	clip-path: inset(0 100% 0 0);
+	animation: banner-load var(--banner-load-seconds) linear forwards;
+}
+
+@keyframes banner-load {
+	from {
+		clip-path: inset(0 0 100% 0);
+	}
+	to {
+		clip-path: inset(0 0 0 0);
+	}
+}
+
+.banner-progress {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	width: 100%;
+	max-width: 1068px;
+	margin: 6px auto 0;
+	padding: 4px;
+	background: var(--face);
+	box-shadow: var(--bevel-out);
+	color: var(--ink);
+	font-size: var(--font-size);
+}
+.banner-progress-label {
+	position: relative;
+	display: block;
+	min-width: 120px;
+}
+.banner-progress-done {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	animation: banner-swap var(--banner-load-seconds) steps(1, end) forwards;
+}
+.banner-progress-well {
+	flex: 1;
+	height: 1rem;
+	padding: 2px;
+	background: var(--white);
+	box-shadow: var(--bevel-in);
+	overflow: hidden;
+}
+.banner-progress-fill {
+	height: 100%;
+	background: repeating-linear-gradient(
+		90deg,
+		var(--titlebar-a) 0 8px,
+		transparent 8px 10px
+	);
+	animation: banner-progress-fill var(--banner-load-seconds) linear forwards;
+}
+@keyframes banner-progress-fill {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+@keyframes banner-swap {
+	0%,
+	99.99% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.banner {
+		animation: none;
+		clip-path: none;
+	}
+	.banner-progress {
+		display: none;
+	}
+}
+
+/* ------------------------------------------------------- retro chrome ----- */
+
+.divider {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0.5rem 0;
+	min-height: 1.5rem;
+}
+
+.divider img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Badge wall -- rendered by BadgeWall.svelte. */
+.badge-wall {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem;
+	justify-content: center;
+	background: var(--white);
+	box-shadow: var(--bevel-in);
+	margin-top: 0.75rem;
+	padding: 0.5rem;
+}
+
+.badge-wall img {
+	width: 88px;
+	height: 31px;
+	object-fit: contain;
+	image-rendering: pixelated;
+}
+
+.w98-button {
+	align-items: center;
+	background: var(--face);
+	border: none;
+	box-shadow: var(--bevel-out);
+	color: var(--ink);
+	display: inline-flex;
+	font-family: var(--f-ui);
+	gap: 0.25rem;
+	padding: 2px 0.375rem;
+}
+
+.w98-button:hover {
+	box-shadow: var(--bevel-out-bold);
+}
+
+.w98-button:active,
+.w98-button[data-active='true'] {
+	box-shadow: var(--bevel-in);
+}
+
+.w98-button:focus-visible {
+	outline: 1px dotted var(--ink);
+	outline-offset: -4px;
+}
+
+.w98-button:disabled {
+	color: var(--shadow);
+	text-shadow: 1px 1px 0 var(--white);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+	width: 16px;
+}
+::-webkit-scrollbar:horizontal {
+	height: 16px;
+}
+::-webkit-scrollbar-corner {
+	background: var(--face-light);
+}
+::-webkit-scrollbar-track {
+	background-image: url('/retro/glyphs/scrollbar-background.svg');
+	background-size: 2px;
+}
+::-webkit-scrollbar-thumb {
+	background-color: var(--face-light);
+	box-shadow: var(--bevel-out);
+}
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:horizontal:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment {
+	display: block;
+}
+::-webkit-scrollbar-button:horizontal:start:increment,
+::-webkit-scrollbar-button:horizontal:end:decrement,
+::-webkit-scrollbar-button:vertical:start:increment,
+::-webkit-scrollbar-button:vertical:end:decrement {
+	display: none;
+}
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment {
+	height: 16px;
+	background-size: contain;
+}
+::-webkit-scrollbar-button:vertical:start:decrement {
+	background-image: url('/retro/glyphs/button-up.svg');
+}
+::-webkit-scrollbar-button:vertical:end:increment {
+	background-image: url('/retro/glyphs/button-down.svg');
+}
+::-webkit-scrollbar-button:horizontal:start:decrement {
+	width: 16px;
+	background-image: url('/retro/glyphs/button-left.svg');
+}
+::-webkit-scrollbar-button:horizontal:end:increment {
+	width: 16px;
+	background-image: url('/retro/glyphs/button-right.svg');
+}

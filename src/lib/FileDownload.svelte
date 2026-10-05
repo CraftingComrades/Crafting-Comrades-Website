@@ -7,9 +7,10 @@
 	}
 
 	let { file, name = '' }: Props = $props();
-	let fileName: string =
-		name || file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.') - 11);
-	let extension: string = file.substring(file.lastIndexOf('.') + 1);
+	let fileName: string = $derived(
+		name || file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.') - 11),
+	);
+	let extension: string = $derived(file.substring(file.lastIndexOf('.') + 1));
 
 	function capitalCase(str: string) {
 		let words = str.split('_');
@@ -20,20 +21,49 @@
 	}
 
 	const currentEvent = getCurrentEvent();
+
+	const ICONS: Record<string, string> = {
+		// pictures
+		png: 'Image',
+		jpg: 'Image',
+		jpeg: 'Image',
+		gif: 'Image',
+		webp: 'Image',
+		svg: 'Image',
+		bmp: 'Image',
+		tiff: 'Image',
+		ico: 'Image',
+		// motion
+		mp4: 'Video',
+		webm: 'Video',
+		mov: 'Video',
+		avi: 'Video',
+		mkv: 'Video',
+		m4v: 'Video',
+		// sound
+		mp3: 'Audio',
+		wav: 'Audio',
+		ogg: 'Audio',
+		flac: 'Audio',
+		m4a: 'Audio',
+		opus: 'Audio',
+		// archives & packages
+		zip: 'Compressed',
+		rar: 'Compressed',
+		'7z': 'Compressed',
+		tar: 'Compressed',
+		gz: 'Compressed',
+		bz2: 'Compressed',
+		xz: 'Compressed',
+	};
+
+	const iconExt = 'fileIconExt' in currentEvent ? currentEvent.fileIconExt : 'svg';
+	const iconName = $derived(ICONS[extension.toLowerCase()] ?? 'File');
+	const iconSrc = $derived(`/${currentEvent.key}/FileIcons/${iconName}.${iconExt}`);
 </script>
 
 <a href={file} download="name.zip" class="file">
-	{#if extension == 'png' || extension == 'webp' || extension == 'jpg' || extension == 'jpeg' || extension == 'gif' || extension == 'svg'}
-		<img src="/{currentEvent.key}/FileIcons/Image.svg" class="file-icon" alt="File Download" />
-	{:else if extension == 'mp4' || extension == 'webm' || extension == 'mov'}
-		<img src="/{currentEvent.key}/FileIcons/Video.svg" class="file-icon" alt="File Download" />
-	{:else if extension == 'mp3' || extension == 'wav' || extension == 'ogg'}
-		<img src="/{currentEvent.key}/FileIcons/Audio.svg" class="file-icon" alt="File Download" />
-	{:else if extension == 'zip' || extension == 'rar' || extension == '7z'}
-		<img src="/{currentEvent.key}/FileIcons/Compressed.svg" class="file-icon" alt="File Download" />
-	{:else}
-		<img src="/{currentEvent.key}/FileIcons/File.svg" class="file-icon" alt="File Download" />
-	{/if}
+	<img src={iconSrc} class="file-icon" alt="File Download" />
 	<div class="file-extenstion">{extension}</div>
 	<div class="file-name">{capitalCase(fileName)}</div>
 </a>
@@ -42,11 +72,13 @@
 	.file {
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		flex-direction: column;
+		min-width: 0;
+		gap: 0.25rem;
 		width: 100%;
 		height: 100%;
-		padding: 1rem;
+		padding: 0.75rem 0.5rem;
 		border: 1px solid var(--border-color);
 		border-radius: 0.5rem;
 		background-color: var(--background-color);
@@ -55,22 +87,21 @@
 	}
 	.file-icon {
 		width: 100%;
-		max-width: 10rem;
+		max-width: 4rem;
 		height: auto;
 		filter: drop-shadow(-0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.075));
 	}
 	.file-extenstion {
-		position: absolute;
-		margin-top: 0.5rem;
 		text-transform: uppercase;
-		font-size: 1.5rem;
+		font-size: 0.75rem;
+		letter-spacing: 0.05em;
+		opacity: 0.7;
 	}
 	.file-name {
-		font-size: 1rem;
-		position: absolute;
+		font-size: 0.8125rem;
+		text-align: center;
 		max-width: 100%;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		bottom: 0;
+		margin-top: auto;
+		padding: 0 2px;
 	}
 </style>
