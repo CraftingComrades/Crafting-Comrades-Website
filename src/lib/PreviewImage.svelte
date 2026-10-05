@@ -2,20 +2,17 @@
 	import { pb } from './utils';
 
 	interface Props {
-		imageUrl?: string;
-		imageRef?: {
+		imageRef: {
 			record: any;
 			file: string;
 		};
 	}
 
-	let { imageUrl, imageRef }: Props = $props();
-	const smallImageUrl = imageRef
-		? pb.files.getURL(imageRef.record, imageRef.file, { thumb: '180x180' })
-		: imageUrl;
-	if (imageRef) {
-		imageUrl = pb.files.getURL(imageRef.record, imageRef.file);
-	}
+	let { imageRef }: Props = $props();
+	let smallImageUrl = $derived(
+		pb.files.getURL(imageRef.record, imageRef.file, { thumb: '180x180' }),
+	);
+	let imageUrl = $derived(pb.files.getURL(imageRef.record, imageRef.file));
 
 	let overlayHidden = $state(true);
 </script>
