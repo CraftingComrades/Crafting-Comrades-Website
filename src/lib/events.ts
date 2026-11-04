@@ -1,7 +1,18 @@
-import { dev } from '$app/environment';
-import { page } from '$app/state';
-
 const allEvents = {
+	space: {
+		key: 'space',
+		dateStart: { month: 9, day: 4 },
+		dateEnd: { month: 9, day: 10 },
+		tabs: {
+			modpacks: 'Launch Packs',
+			worlds: 'Planets',
+			map: 'Star Map',
+			about: 'Mission Control',
+			services: 'Space Station',
+			tmpFiles: 'Cargo Bay',
+		},
+		copyright: '© copyright lololol',
+	},
 	retro: {
 		key: 'retro',
 		dateStart: { month: 6, day: 27 },
@@ -78,14 +89,12 @@ const defaultEvent = {
 
 export type SiteEvent = (typeof allEvents)[keyof typeof allEvents] | typeof defaultEvent;
 
-export function getCurrentEvent() {
-	const override = dev ? page.url.searchParams.get('theme') : null;
+export function getCurrentEvent(now = new Date(), override: string | null = null) {
 	if (override) {
 		const forced = Object.values(allEvents).find((event) => event.key === override);
 		if (forced) return forced;
 	}
 
-	const now = new Date();
 	const currentMonth = now.getMonth();
 	const currentDay = now.getDate();
 

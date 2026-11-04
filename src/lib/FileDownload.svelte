@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getCurrentEvent } from './events';
+	import { page } from '$app/state';
 
 	interface Props {
 		file: string; // url to the file
@@ -20,7 +20,7 @@
 		return capitalizedWords.join(' ');
 	}
 
-	const currentEvent = getCurrentEvent();
+	const currentEvent = $derived(page.data.event);
 
 	const ICONS: Record<string, string> = {
 		// pictures
@@ -57,9 +57,11 @@
 		xz: 'Compressed',
 	};
 
-	const iconExt = 'fileIconExt' in currentEvent ? currentEvent.fileIconExt : 'svg';
+	const iconExt = $derived('fileIconExt' in currentEvent ? currentEvent.fileIconExt : 'svg');
 	const iconName = $derived(ICONS[extension.toLowerCase()] ?? 'File');
-	const iconSrc = $derived(`/${currentEvent.key}/FileIcons/${iconName}.${iconExt}`);
+	const iconSrc = $derived(
+		`/${currentEvent.key === 'space' ? 'default' : currentEvent.key}/FileIcons/${iconName}.${iconExt}`,
+	);
 </script>
 
 <a href={file} download="name.zip" class="file">
