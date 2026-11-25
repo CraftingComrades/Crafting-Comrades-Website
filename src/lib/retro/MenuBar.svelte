@@ -82,9 +82,9 @@
 								{#if child.icon}
 									<img src="/retro/icons/{child.icon}" alt="" class="menu-icon" />
 								{/if}
-								<span class="menu-label"
-									><span class="hotkey">{child.label?.[0]}</span>{child.label?.slice(1)}</span
-								>
+								<span class="menu-label">
+									<span class="hotkey">{child.label?.[0]}</span>{child.label?.slice(1)}
+								</span>
 							</button>
 						{/if}
 					{/each}

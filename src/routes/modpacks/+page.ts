@@ -1,5 +1,5 @@
-import { Collections, type ModpacksResponse } from '$lib/types';
-import { pb } from '$lib/utils';
+import { Collections, type ModpacksResponse } from '#lib/types.ts';
+import { pb } from '#lib/utils.ts';
 import type { PageLoad } from './$types';
 
 export const prerender = true;

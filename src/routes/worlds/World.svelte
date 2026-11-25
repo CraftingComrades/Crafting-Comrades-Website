@@ -1,8 +1,8 @@
 <script lang="ts">
-	import FileDownload from '$lib/FileDownload.svelte';
-	import PreviewImage from '$lib/PreviewImage.svelte';
-	import type { WorldsResponse } from '$lib/types';
-	import { pb } from '$lib/utils';
+	import FileDownload from '#lib/FileDownload.svelte';
+	import PreviewImage from '#lib/PreviewImage.svelte';
+	import type { WorldsResponse } from '#lib/types.ts';
+	import { pb } from '#lib/utils.ts';
 
 	interface Props {
 		world: WorldsResponse;

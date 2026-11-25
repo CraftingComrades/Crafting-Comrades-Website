@@ -1,6 +1,6 @@
-import { dev } from '$app/environment';
-import { getCurrentEvent } from '$lib/events';
-import type { SpaceImage } from '$lib/space-image';
+import { dev } from '$app/env';
+import { getCurrentEvent } from '#lib/events.ts';
+import type { SpaceImage } from '#lib/space-image.ts';
 import type { LayoutServerLoad } from './$types';
 
 export const load: LayoutServerLoad = async ({ fetch, url, setHeaders }) => {

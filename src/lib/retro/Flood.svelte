@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { onDestroy, onMount } from 'svelte';
 
 	const MAX_LEVEL = 100;
@@ -94,15 +94,17 @@
 		<path
 			id="gentle-wave"
 			d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v450h-352z"
-		/>
+		></path>
+
 		<pattern id="water" patternUnits="userSpaceOnUse" width={TEXTURE_W} height={TEXTURE_H}>
-			<image href="/retro/flood/flood-water.png" x="0" y="0" width={TEXTURE_W} height={TEXTURE_H} />
+			<image href="/retro/flood/flood-water.png" x="0" y="0" width={TEXTURE_W} height={TEXTURE_H}
+			></image>
 		</pattern>
 	</defs>
 	<g class="retro-wave">
-		<use href="#gentle-wave" x="48" y="0" />
-		<use href="#gentle-wave" x="48" y="3" />
-		<use href="#gentle-wave" x="48" y="5" />
+		<use href="#gentle-wave" x="48" y="0"></use>
+		<use href="#gentle-wave" x="48" y="3"></use>
+		<use href="#gentle-wave" x="48" y="5"></use>
 	</g>
 </svg>
 

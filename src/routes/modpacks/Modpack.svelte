@@ -1,8 +1,8 @@
 <script lang="ts">
-	import FileDownload from '$lib/FileDownload.svelte';
-	import PreviewImage from '$lib/PreviewImage.svelte';
-	import type { ModpacksRecord, ModpacksResponse } from '$lib/types';
-	import { pb } from '$lib/utils';
+	import FileDownload from '#lib/FileDownload.svelte';
+	import PreviewImage from '#lib/PreviewImage.svelte';
+	import type { ModpacksRecord, ModpacksResponse } from '#lib/types.ts';
+	import { pb } from '#lib/utils.ts';
 
 	interface Props {
 		modpack: ModpacksRecord;

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import OnlineServer from '$lib/OnlineServer.svelte';
+	import OnlineServer from '#lib/OnlineServer.svelte';
 	import Header from './Header.svelte';
-	import BadgeWall from '$lib/retro/BadgeWall.svelte';
-	import RetroDivider from '$lib/retro/RetroDivider.svelte';
-	import Retro from '$lib/retro/Retro.svelte';
+	import BadgeWall from '#lib/retro/BadgeWall.svelte';
+	import RetroDivider from '#lib/retro/RetroDivider.svelte';
+	import Retro from '#lib/retro/Retro.svelte';
 	import type { LayoutProps } from './$types';
 
 	let { children, data }: LayoutProps = $props();
@@ -39,9 +39,9 @@
 		<p>{event.copyright}</p>
 		{#if event.key === 'space' && data.spaceImage}
 			<p class="space-credit">
-				Background: <a href={data.spaceImage.sourceUrl} target="_blank" rel="noreferrer"
-					>{data.spaceImage.title}</a
-				>
+				Background: <a href={data.spaceImage.sourceUrl} target="_blank" rel="noreferrer">
+					{data.spaceImage.title}
+				</a>
 				· {data.spaceImage.date} · {data.spaceImage.credit}
 			</p>
 		{/if}

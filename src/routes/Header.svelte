@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SiteEvent } from '$lib/events';
+	import type { SiteEvent } from '#lib/events.ts';
 
 	interface Props {
 		event: SiteEvent;
