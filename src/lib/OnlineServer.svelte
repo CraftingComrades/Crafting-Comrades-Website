@@ -30,6 +30,7 @@
 							<span style="float:right">
 								{serverData.players?.online} / {serverData.players?.max}
 							</span><br />
+							<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 							{@html serverData.motd?.html[0]}<br />{@html serverData.motd?.html[1]}
 						</div>
 					</div>

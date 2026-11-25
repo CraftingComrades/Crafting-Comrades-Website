@@ -10,7 +10,7 @@
 </svelte:head>
 
 <div class="modpack-list">
-	{#each data.modpacks as modpack}
+	{#each data.modpacks as modpack (modpack.id)}
 		<Modpack {modpack} />
 	{/each}
 	{#if data.modpacks.length === 0}

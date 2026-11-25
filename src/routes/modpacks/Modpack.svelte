@@ -1,7 +1,7 @@
 <script lang="ts">
 	import FileDownload from '#lib/FileDownload.svelte';
 	import PreviewImage from '#lib/PreviewImage.svelte';
-	import type { ModpacksRecord, ModpacksResponse } from '#lib/types.ts';
+	import type { ModpacksRecord } from '#lib/types.ts';
 	import { pb } from '#lib/utils.ts';
 
 	interface Props {
@@ -36,7 +36,7 @@
 				{/if}
 
 				{#if modpack.tags?.length}
-					{#each (modpack.tags ?? '').split(',') as tag}
+					{#each (modpack.tags ?? '').split(',') as tag (tag)}
 						<div class="tag">{tag}</div>
 					{/each}
 				{/if}
@@ -55,7 +55,7 @@
 				<div class="section">
 					<div class="section-title">Images</div>
 					<div class="images">
-						{#each modpack.images ?? [] as image}
+						{#each modpack.images ?? [] as image (image)}
 							<PreviewImage imageRef={{ record: modpack, file: image }} />
 						{/each}
 					</div>
@@ -65,7 +65,7 @@
 				<div class="section">
 					<div class="section-title">Other Downloads</div>
 					<div class="other-downloads">
-						{#each modpack.otherDownloads ?? [] as download}
+						{#each modpack.otherDownloads ?? [] as download (download)}
 							<FileDownload file={pb.files.getURL(modpack, download)} />
 						{/each}
 					</div>
@@ -75,7 +75,7 @@
 				<div class="section">
 					<div class="section-title">Downloads</div>
 					<div class="downloads">
-						{#each modpack.downloads ?? [] as download}
+						{#each modpack.downloads ?? [] as download (download)}
 							<FileDownload file={pb.files.getURL(modpack, download)} />
 						{/each}
 					</div>

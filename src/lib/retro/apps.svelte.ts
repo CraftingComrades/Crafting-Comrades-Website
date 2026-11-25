@@ -1,3 +1,4 @@
+import type { RouteId } from '$app/types';
 import type { Component } from 'svelte';
 import BubbleWrap from './apps/BubbleWrap.svelte';
 import HampsterDance from './apps/HampsterDance.svelte';
@@ -43,7 +44,7 @@ export const RETRO_APPS: RetroApp[] = [
 	},
 ];
 
-export const RETRO_LINKS: { label: string; href: string; icon: string }[] = [
+export const RETRO_LINKS: { label: string; href: RouteId; icon: string }[] = [
 	{ label: 'Modpacks', href: '/modpacks', icon: 'directory_business_calendar-0.png' },
 	{ label: 'Worlds', href: '/worlds', icon: 'directory_open_file_mydocs-0.png' },
 	{ label: 'Map', href: '/map', icon: 'directory_explorer-0.png' },

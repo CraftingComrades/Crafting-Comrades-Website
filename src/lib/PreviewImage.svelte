@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { pb } from './utils';
 
+	type FileRecord = Parameters<typeof pb.files.getURL>[0];
+
 	interface Props {
 		imageRef: {
-			record: any;
+			record: FileRecord;
 			file: string;
 		};
 	}

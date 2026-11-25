@@ -10,7 +10,7 @@
 </svelte:head>
 
 <div class="service-list">
-	{#each data.services as service}
+	{#each data.services as service (service.id)}
 		<Service {service} />
 	{/each}
 	{#if data.services.length === 0}

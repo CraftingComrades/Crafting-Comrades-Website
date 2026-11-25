@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { SiteEvent } from '#lib/events.ts';
 
 	interface Props {
@@ -25,12 +26,12 @@
 		</div>
 	{/if}
 	<nav>
-		<a href="/modpacks">{event.tabs.modpacks}</a>
-		<a href="/worlds">{event.tabs.worlds}</a>
-		<a href="/map">{event.tabs.map}</a>
-		<a href="/about">{event.tabs.about}</a>
-		<a href="/services">{event.tabs.services}</a>
-		<a href="/tmp-files">{event.tabs.tmpFiles}</a>
+		<a href={resolve('/modpacks')}>{event.tabs.modpacks}</a>
+		<a href={resolve('/worlds')}>{event.tabs.worlds}</a>
+		<a href={resolve('/map')}>{event.tabs.map}</a>
+		<a href={resolve('/about')}>{event.tabs.about}</a>
+		<a href={resolve('/services')}>{event.tabs.services}</a>
+		<a href={resolve('/tmp-files')}>{event.tabs.tmpFiles}</a>
 	</nav>
 </header>
 

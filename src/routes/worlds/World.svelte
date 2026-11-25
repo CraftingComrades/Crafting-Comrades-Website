@@ -36,7 +36,7 @@
 				{/if}
 
 				{#if world.tags?.length}
-					{#each (world.tags ?? '').split(',') as tag}
+					{#each (world.tags ?? '').split(',') as tag (tag)}
 						<div class="tag">{tag}</div>
 					{/each}
 				{/if}
@@ -55,7 +55,7 @@
 				<div class="section">
 					<div class="section-title">Images</div>
 					<div class="images">
-						{#each world.images ?? [] as image}
+						{#each world.images ?? [] as image (image)}
 							<PreviewImage imageRef={{ record: world, file: image }} />
 						{/each}
 					</div>
@@ -65,7 +65,7 @@
 				<div class="section">
 					<div class="section-title">Other Downloads</div>
 					<div class="other-downloads">
-						{#each world.otherDownloads ?? [] as download}
+						{#each world.otherDownloads ?? [] as download (download)}
 							<FileDownload file={pb.files.getURL(world, download)} />
 						{/each}
 					</div>
@@ -75,7 +75,7 @@
 				<div class="section">
 					<div class="section-title">Downloads</div>
 					<div class="downloads">
-						{#each world.downloads ?? [] as download}
+						{#each world.downloads ?? [] as download (download)}
 							<FileDownload file={pb.files.getURL(world, download)} />
 						{/each}
 					</div>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import FileDownload from '#lib/FileDownload.svelte';
 	import PreviewImage from '#lib/PreviewImage.svelte';
-	import type { ServicesRecord, ServicesResponse } from '#lib/types.ts';
+	import type { ServicesRecord } from '#lib/types.ts';
 	import { pb } from '#lib/utils.ts';
 
 	interface Props {
@@ -29,7 +29,7 @@
 			</div>
 			<div class="tags">
 				{#if service.tags?.length}
-					{#each (service.tags ?? '').split(',') as tag}
+					{#each (service.tags ?? '').split(',') as tag (tag)}
 						<div class="tag">{tag}</div>
 					{/each}
 				{/if}
@@ -48,7 +48,7 @@
 				<div class="section">
 					<div class="section-title">Images</div>
 					<div class="images">
-						{#each service.images ?? [] as image}
+						{#each service.images ?? [] as image (image)}
 							<PreviewImage imageRef={{ record: service, file: image }} />
 						{/each}
 					</div>
@@ -61,6 +61,7 @@
 						class="linkButton"
 						style=""
 						href={service.link}
+						rel="external"
 					>
 						{#if service.linkButton}
 							{service.linkButton}
@@ -74,7 +75,7 @@
 				<div class="section">
 					<div class="section-title">Other Downloads</div>
 					<div class="other-downloads">
-						{#each service.otherDownloads ?? [] as download}
+						{#each service.otherDownloads ?? [] as download (download)}
 							<FileDownload file={pb.files.getURL(service, download)} />
 						{/each}
 					</div>
@@ -84,7 +85,7 @@
 				<div class="section">
 					<div class="section-title">Downloads</div>
 					<div class="downloadslink">
-						{#each service.downloads ?? [] as download}
+						{#each service.downloads ?? [] as download (download)}
 							<FileDownload file={pb.files.getURL(service, download)} />
 						{/each}
 					</div>

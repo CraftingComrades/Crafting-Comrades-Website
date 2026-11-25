@@ -10,7 +10,7 @@
 </svelte:head>
 
 <div class="worlds-list">
-	{#each data.worlds as world}
+	{#each data.worlds as world (world.id)}
 		<World {world} />
 	{/each}
 	{#if data.worlds.length === 0}

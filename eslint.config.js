@@ -1,9 +1,9 @@
-import prettier from 'eslint-config-prettier';
 import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
+import prettier from 'eslint-config-prettier';
 import svelte from 'eslint-plugin-svelte';
-import globals from 'globals';
 import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
 
@@ -46,5 +46,5 @@ export default defineConfig(
 			],
 		},
 	},
-	{ ignores: ['**/.svelte-kit', 'build/', 'dist/'] },
+	{ ignores: ['**/.svelte-kit', 'build/', 'dist/', 'static/retro/pinball/'] },
 );

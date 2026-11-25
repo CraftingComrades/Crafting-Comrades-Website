@@ -39,7 +39,7 @@
 		<p>{event.copyright}</p>
 		{#if event.key === 'space' && data.spaceImage}
 			<p class="space-credit">
-				Background: <a href={data.spaceImage.sourceUrl} target="_blank" rel="noreferrer">
+				Background: <a href={data.spaceImage.sourceUrl} target="_blank" rel="noreferrer external">
 					{data.spaceImage.title}
 				</a>
 				· {data.spaceImage.date} · {data.spaceImage.credit}

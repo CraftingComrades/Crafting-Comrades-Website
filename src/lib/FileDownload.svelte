@@ -64,7 +64,7 @@
 	);
 </script>
 
-<a href={file} download="name.zip" class="file">
+<a href={file} download="name.zip" class="file" rel="external">
 	<img src={iconSrc} class="file-icon" alt="File Download" />
 	<div class="file-extenstion">{extension}</div>
 	<div class="file-name">{capitalCase(fileName)}</div>

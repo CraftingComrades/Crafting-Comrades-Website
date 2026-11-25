@@ -16,6 +16,6 @@
 
 <div class="badge-wall">
 	{#each badges as badge (badge)}
-		<img src="/retro/badges/{badge}" alt={'Web badge'} />
+		<img src="/retro/badges/{badge}" alt="Web badge" />
 	{/each}
 </div>

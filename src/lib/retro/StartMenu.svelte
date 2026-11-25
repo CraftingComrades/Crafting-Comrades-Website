@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
+	import type { RouteId } from '$app/types';
 	import { click98, playSound } from './sound';
 	import { isOpen, launch, RETRO_APPS, RETRO_LINKS, type RetroApp } from './apps.svelte';
 
@@ -18,10 +20,10 @@
 		onlaunch();
 	}
 
-	function openLink(href: string) {
+	function openLink(href: RouteId) {
 		playSound('clickDown', 0.4);
 		onlaunch();
-		void goto(href);
+		void goto(resolve(href));
 	}
 
 	function handleWindowClick(e: MouseEvent) {
